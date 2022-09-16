@@ -25,6 +25,7 @@ apt-get upgrade -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-co
 
 # build and install DPDK (https://docs.openvswitch.org/en/latest/intro/install/dpdk/)
 apt-get install -y build-essential meson ninja-build python3-pyelftools libnuma-dev
+cd /root/
 wget https://fast.dpdk.org/rel/dpdk-21.11.1.tar.xz
 tar xf dpdk-21.11.1.tar.xz
 export DPDK_DIR=/root/dpdk-stable-21.11.1

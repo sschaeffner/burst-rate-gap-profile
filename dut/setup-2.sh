@@ -11,6 +11,7 @@ DUT_INGRESS_PCI="0000:06:00.1"
 DUT_EGRESS_PCI="0000:06:00.0"
 
 DPDK_DIR=/root/dpdk-stable-21.11.1
+DPDK_KMODS_DIR=/root/dpdk-kmods
 
 # setup
 sysctl -w vm.nr_hugepages=2048
