@@ -9,7 +9,6 @@ set -x
 
 DUT_INGRESS_IF="enp6s0f1"
 DUT_EGRESS_IF="enp6s0f0"
-
 DUT_INGRESS_PCI="0000:06:00.1"
 DUT_EGRESS_PCI="0000:06:00.0"
 
@@ -54,36 +53,22 @@ cd $OVS_DIR
 make
 make install
 
+# set "intel_iommu=on iommu=pt" in Linux kernel boot parameters
+echo "GRUB_CMDLINE_LINUX=\"console=ttyS0,115200 intel_iommu=on iommu=pt\"" >> /etc/default/grub
+update-grub
 
-# setup
-sysctl -w vm.nr_hugepages=2048
-mount -t hugetlbfs none /dev/hugepages
+# setup systemd service for setup-2
+echo "[Unit]
+Description=setup part 2.
 
-# run Open vSwitch
-export PATH=$PATH:/usr/local/share/openvswitch/scripts
-export DB_SOCK=/usr/local/var/run/openvswitch/db.sock
-ovs-ctl --no-ovs-vswitchd --system-id=b31ad044-277a-11ed-a261-0242ac120002 start
-ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-init=true
-ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-extra="--iova-mode=pa"
-ovs-ctl --no-ovsdb-server --db-sock="$DB_SOCK" start
+[Service]
+Type=simple
+ExecStart=/local/repository/dut/setup-2.sh
 
-# validate
-ovs-vsctl get Open_vSwitch . dpdk_initialized
-ovs-vswitchd --version
-
-# bind devices
-modprobe uio
-insmod $DPDK_KMODS_DIR/linux/igb_uio/igb_uio.ko
-
-$DPDK_DIR/usertools/dpdk-devbind.py --bind=igb_uio $DUT_INGRESS_PCI
-$DPDK_DIR/usertools/dpdk-devbind.py --bind=igb_uio $DUT_EGRESS_PCI
-$DPDK_DIR/usertools/dpdk-devbind.py --status
-
-# create bridge
-ovs-vsctl add-br br0 -- set bridge br0 datapath_type=netdev
-ovs-vsctl add-port br0 myportnameone -- set Interface myportnameone type=dpdk options:dpdk-devargs=$DUT_INGRESS_PCI
-ovs-vsctl add-port br0 myportnametwo -- set Interface myportnametwo type=dpdk options:dpdk-devargs=$DUT_EGRESS_PCI
-
-# TODO set "intel_iommu=on iommu=pt" in Linux kernel boot parameters
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/setup2.service
+systemctl enable setup2.service
 
 echo "setup successful"
+echo "rebooting to activate iommu configuration..."
+shutdown -r now
