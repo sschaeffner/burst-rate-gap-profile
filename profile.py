@@ -14,7 +14,7 @@ import geni.rspec.emulab as emulab
 
 pc = portal.Context()
 
-disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-BETA"
+disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD"
 
 hardware_type = "c220g2"
 
