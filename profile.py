@@ -14,9 +14,7 @@ import geni.rspec.emulab as emulab
 
 pc = portal.Context()
 
-# debian bullseye live image built with mandelstamm
-# sets "intel_iommu=on iommu=pt" in Linux kernel boot parameters
-disk_image = "https://schaeffner.xyz/ma/debian-bullseye-iommu-meta.xml?uuid=825efa2b-35cd-4fb5-82b5-5e6b2b5a852c"
+disk_image = "UBUNTU22-64-BETA"
 
 hardware_type = "c220g2"
 
