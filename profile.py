@@ -1,6 +1,6 @@
 """Experiment from motivating example of [1].
 
-[1] Paul Emmerich, Sebastian Gallenmueller, Gianni Antichi, Andrew W. Moore, Georg Carle, "Mind the Gap – A Comparison of Software Packet Generators,"" in ACM/IEEE Symposium on Architectures for Networking and Communications Systems (ANCS 2017), Beijing, China, May 2017.
+[1] Paul Emmerich, Sebastian Gallenmueller, Gianni Antichi, Andrew W. Moore, Georg Carle, "Mind the Gap - A Comparison of Software Packet Generators,"" in ACM/IEEE Symposium on Architectures for Networking and Communications Systems (ANCS 2017), Beijing, China, May 2017.
 
 Instructions:
 Wait for setup services to be finished. Then login to loadgen and execute `/local/repository/loadgen/measurement.sh`.
