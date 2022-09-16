@@ -1,3 +1,11 @@
+"""Experiment from motivating example of [1].
+
+[1] Paul Emmerich, Sebastian Gallenmueller, Gianni Antichi, Andrew W. Moore, Georg Carle, "Mind the Gap – A Comparison of Software Packet Generators,"" in ACM/IEEE Symposium on Architectures for Networking and Communications Systems (ANCS 2017), Beijing, China, May 2017.
+
+Instructions:
+Wait for setup services to be finished. Then login to loadgen and execute `/local/repository/loadgen/measurement.sh`.
+"""
+
 from geni import portal
 from geni.rspec.pg import RawPC, Link, Execute
 
@@ -7,7 +15,7 @@ import geni.rspec.emulab as emulab
 pc = portal.Context()
 
 # debian bullseye live image built with mandelstamm
-# sets `intel_iommu=on iommu=pt` in Linux kernel boot parameters
+# sets "intel_iommu=on iommu=pt" in Linux kernel boot parameters
 disk_image = "https://schaeffner.xyz/ma/debian-bullseye-iommu-meta.xml?uuid=825efa2b-35cd-4fb5-82b5-5e6b2b5a852c"
 
 hardware_type = "c220g2"
