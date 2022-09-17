@@ -42,5 +42,8 @@ ovs-vsctl add-br br0 -- set bridge br0 datapath_type=netdev
 ovs-vsctl add-port br0 myportnameone -- set Interface myportnameone type=dpdk options:dpdk-devargs=$DUT_INGRESS_PCI
 ovs-vsctl add-port br0 myportnametwo -- set Interface myportnametwo type=dpdk options:dpdk-devargs=$DUT_EGRESS_PCI
 
+# no longer log every command
+set +x
+
 # keep alive
 while [ 1 ]; do sleep 1; done
