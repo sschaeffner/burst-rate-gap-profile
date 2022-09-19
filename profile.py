@@ -16,7 +16,7 @@ pc = portal.Context()
 
 disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD"
 
-hardware_type = "c220g2"
+hardware_type = "d430"
 
 request = pc.makeRequestRSpec()
 
