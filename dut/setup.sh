@@ -7,8 +7,10 @@ set -e
 # log every command
 set -x
 
-DUT_INGRESS_IF="enp4s0f1"
-DUT_EGRESS_IF="enp4s0f0"
+DUT_INGRESS_IF="enp6s0f1"
+DUT_EGRESS_IF="enp6s0f0"
+DUT_INGRESS_PCI="0000:06:00.1"
+DUT_EGRESS_PCI="0000:06:00.0"
 
 # reset interfaces
 ip link set dev $DUT_INGRESS_IF down
